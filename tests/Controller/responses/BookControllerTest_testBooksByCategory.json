@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "title": "RxJava for Android Developers",
+      "slug": "rxjava-for-android-developers",
+      "image": "https:\/\/images.manning.com\/360\/480\/resize\/book\/b\/bc57fb7-b239-4bf5-bbf2-886be8936951\/Tuominen-RxJava-HI.png",
+      "authors": [
+        "Timo Tuominen"
+      ],
+      "meap": false,
+      "publicationDate": 1554076800
+    }
+  ]
+}

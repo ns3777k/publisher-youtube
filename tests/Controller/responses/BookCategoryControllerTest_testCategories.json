@@ -1,17 +1,17 @@
 {
   "items": [
     {
-      "id": 8,
+      "id": 2,
       "title": "Android",
       "slug": "android"
     },
     {
-      "id": 7,
-      "title": "Data",
-      "slug": "data"
+      "id": 1,
+      "title": "Devices",
+      "slug": "devices"
     },
     {
-      "id": 9,
+      "id": 3,
       "title": "Networking",
       "slug": "networking"
     }
