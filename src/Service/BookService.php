@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Book;
+use App\Exception\BookCategoryNotFoundException;
 use App\Model\BookListItem;
 use App\Model\BookListResponse;
 use App\Repository\BookCategoryRepository;
@@ -16,7 +17,10 @@ class BookService
 
     public function getBooksByCategory(int $categoryId): BookListResponse
     {
-        $this->bookCategoryRepository->getById($categoryId);
+        $category = $this->bookCategoryRepository->find($categoryId);
+        if (null === $category) {
+            throw new BookCategoryNotFoundException();
+        }
 
         return new BookListResponse(array_map(
             [$this, 'map'],
