@@ -35,7 +35,7 @@ class Book
     private bool $meap;
 
     /**
-     * @var Collection<Book>
+     * @var Collection<BookCategory>
      */
     #[ORM\ManyToMany(targetEntity: BookCategory::class)]
     private Collection $categories;
@@ -43,6 +43,13 @@ class Book
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -123,7 +130,7 @@ class Book
     }
 
     /**
-     * @return Collection<Book>
+     * @return Collection<BookCategory>
      */
     public function getCategories(): Collection
     {
@@ -131,7 +138,7 @@ class Book
     }
 
     /**
-     * @param Collection<Book> $categories
+     * @param Collection<BookCategory> $categories
      * @return $this
      */
     public function setCategories(Collection $categories): self
