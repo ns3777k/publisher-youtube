@@ -32,7 +32,7 @@ class BookFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies(): array
     {
         return [
-            BookCategoryFixtures::class
+            BookCategoryFixtures::class,
         ];
     }
 }

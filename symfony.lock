@@ -8,6 +8,18 @@
     "composer/xdebug-handler": {
         "version": "2.0.2"
     },
+    "dama/doctrine-test-bundle": {
+        "version": "4.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "4.0",
+            "ref": "56eaa387b5e48ebcc7c95a893b47dfa1ad51449c"
+        },
+        "files": [
+            "config/packages/test/dama_doctrine_test_bundle.yaml"
+        ]
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -117,6 +129,12 @@
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
+    },
+    "helmich/phpunit-json-assert": {
+        "version": "v3.4.2"
+    },
+    "justinrainbow/json-schema": {
+        "version": "5.2.11"
     },
     "laminas/laminas-code": {
         "version": "4.4.3"
@@ -253,6 +271,9 @@
     "sebastian/version": {
         "version": "3.0.2"
     },
+    "softcreatr/jsonpath": {
+        "version": "0.7.5"
+    },
     "symfony/asset": {
         "version": "v5.3.4"
     },
@@ -352,15 +373,6 @@
     },
     "symfony/http-kernel": {
         "version": "v5.3.9"
-    },
-    "symfony/maker-bundle": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
-        }
     },
     "symfony/options-resolver": {
         "version": "v5.3.7"
