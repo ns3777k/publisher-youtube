@@ -9,7 +9,7 @@ class ExceptionMappingResolver
     /**
      * @var ExceptionMapping[]
      */
-    private array $mappings;
+    private array $mappings = [];
 
     public function __construct(array $mappings)
     {
