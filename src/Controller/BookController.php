@@ -2,15 +2,15 @@
 
 namespace App\Controller;
 
+use App\Model\BookDetails;
 use App\Model\BookListResponse;
+use App\Model\ErrorResponse;
 use App\Service\BookService;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Model\ErrorResponse;
-use App\Model\BookDetails;
 
 class BookController extends AbstractController
 {

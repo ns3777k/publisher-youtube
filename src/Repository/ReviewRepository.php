@@ -3,9 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Review;
+use Countable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use Traversable;
 
 /**
  * @method Review|null find($id, $lockMode = null, $lockVersion = null)
@@ -32,7 +34,10 @@ class ReviewRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getPageByBookId(int $id, int $offset, int $limit): Paginator
+    /**
+     * @return Traversable&Countable
+     */
+    public function getPageByBookId(int $id, int $offset, int $limit)
     {
         $query = $this->_em
             ->createQuery('SELECT r FROM App\Entity\Review r WHERE r.book = :id ORDER BY r.createdAt DESC')
