@@ -1,0 +1,43 @@
+{
+  "data": {
+    "pairs": [
+      {
+        "request": {
+          "path": [
+            {"matcher": "glob", "value": "/api/v1/book/*/recommendations"}
+          ],
+          "headers": {
+            "Authorization": [
+              {"matcher": "exact", "value": "Bearer test"}
+            ]
+          }
+        },
+        "response": {
+          "status": 200,
+          "templated": true,
+          "headers": {
+            "Content-Type": ["application/json"]
+          },
+          "bodyFile": "recommend/list-200.json"
+        }
+      },
+      {
+        "request": {
+          "path": [
+            {"matcher": "glob", "value": "/*"}
+          ]
+        },
+        "response": {
+          "status": 403,
+          "headers": {
+            "Content-Type": ["application/json"]
+          },
+          "body": "{\"error\": \"access denied\"}"
+        }
+      }
+    ],
+    "meta": {
+      "schemaVersion": "v5.1"
+    }
+  }
+}

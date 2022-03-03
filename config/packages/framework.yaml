@@ -17,6 +17,14 @@ framework:
     php_errors:
         log: true
 
+    http_client:
+        scoped_clients:
+            recommendation.client:
+                base_uri: '%env(RECOMMENDATION_SVC_URL)%'
+                headers:
+                    Accept: 'application/json'
+                    Authorization: 'Bearer %env(RECOMMENDATION_SVC_TOKEN)%'
+
 when@test:
     framework:
         test: true

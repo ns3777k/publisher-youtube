@@ -1,0 +1,9 @@
+{
+  "ts": {{ now '' 'unix' }},
+  "id": {{ Request.Path.[3] }},
+  "recommendations": [
+    {
+      "id": {{ randomIntegerRange 1 3 }}
+    }
+  ]
+}
