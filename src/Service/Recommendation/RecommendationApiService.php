@@ -12,7 +12,7 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Throwable;
 
-class RecommendationService
+class RecommendationApiService
 {
     public function __construct(private HttpClientInterface $recommendationClient, private SerializerInterface $serializer)
     {
