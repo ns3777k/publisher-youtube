@@ -12,7 +12,7 @@ services:
       - "5433:5432"
 
   hoverfly-test:
-    container_name: hoverfly
+    container_name: hoverfly-test
     image: spectolabs/hoverfly:v1.3.4
     command:
       - "-webserver"
