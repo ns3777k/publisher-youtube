@@ -130,6 +130,15 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "guzzlehttp/guzzle": {
+        "version": "6.5.5"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.5.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.8.5"
+    },
     "helmich/phpunit-json-assert": {
         "version": "v3.4.2"
     },
@@ -139,11 +148,32 @@
     "laminas/laminas-code": {
         "version": "4.4.3"
     },
+    "lcobucci/clock": {
+        "version": "2.2.0"
+    },
+    "lcobucci/jwt": {
+        "version": "4.1.5"
+    },
+    "lexik/jwt-authentication-bundle": {
+        "version": "2.15",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "5b2157bcd5778166a5696e42f552ad36529a07a6"
+        },
+        "files": [
+            "config/packages/lexik_jwt_authentication.yaml"
+        ]
+    },
     "monolog/monolog": {
         "version": "2.3.5"
     },
     "myclabs/deep-copy": {
         "version": "1.10.2"
+    },
+    "namshi/jose": {
+        "version": "7.2.3"
     },
     "nelmio/api-doc-bundle": {
         "version": "3.0",
@@ -158,8 +188,14 @@
             "config/routes/nelmio_api_doc.yaml"
         ]
     },
+    "netresearch/jsonmapper": {
+        "version": "v2.1.0"
+    },
     "nikic/php-parser": {
         "version": "v4.13.0"
+    },
+    "ns3777k/hoverfly": {
+        "version": "v1.2.0"
     },
     "phar-io/manifest": {
         "version": "2.0.3"
@@ -181,9 +217,6 @@
     },
     "phpspec/prophecy": {
         "version": "1.14.0"
-    },
-    "phpstan/phpstan": {
-        "version": "0.12.99"
     },
     "phpunit/php-code-coverage": {
         "version": "9.2.8"
@@ -223,8 +256,14 @@
     "psr/event-dispatcher": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/log": {
         "version": "2.0.0"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "sebastian/cli-parser": {
         "version": "1.0.1"
@@ -276,6 +315,9 @@
     },
     "softcreatr/jsonpath": {
         "version": "0.7.5"
+    },
+    "stella-maris/clock": {
+        "version": "0.1.4"
     },
     "symfony/asset": {
         "version": "v5.3.4"
@@ -368,6 +410,9 @@
             "src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v5.3.14"
+    },
     "symfony/http-client-contracts": {
         "version": "v2.4.0"
     },
@@ -398,6 +443,9 @@
     "symfony/options-resolver": {
         "version": "v5.3.7"
     },
+    "symfony/password-hasher": {
+        "version": "v5.3.14"
+    },
     "symfony/phpunit-bridge": {
         "version": "5.3",
         "recipe": {
@@ -416,11 +464,17 @@
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.23.1"
     },
+    "symfony/polyfill-intl-idn": {
+        "version": "v1.25.0"
+    },
     "symfony/polyfill-intl-normalizer": {
         "version": "v1.23.0"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.23.1"
+    },
+    "symfony/polyfill-php56": {
+        "version": "v1.20.0"
     },
     "symfony/polyfill-php73": {
         "version": "v1.23.0"
@@ -458,6 +512,30 @@
     },
     "symfony/runtime": {
         "version": "v5.3.4"
+    },
+    "symfony/security-bundle": {
+        "version": "5.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.3",
+            "ref": "98f1f2b0d635908c2b40f3675da2d23b1a069d30"
+        },
+        "files": [
+            "config/packages/security.yaml"
+        ]
+    },
+    "symfony/security-core": {
+        "version": "v5.3.14"
+    },
+    "symfony/security-csrf": {
+        "version": "v5.3.14"
+    },
+    "symfony/security-guard": {
+        "version": "v5.3.14"
+    },
+    "symfony/security-http": {
+        "version": "v5.3.14"
     },
     "symfony/serializer": {
         "version": "v5.3.8"

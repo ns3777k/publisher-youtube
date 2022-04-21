@@ -8,7 +8,7 @@ end_of_line = LF
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{php,html,twig}]
+[*.{php,html,twig,yaml}]
 indent_style = space
 indent_size = 4
 
