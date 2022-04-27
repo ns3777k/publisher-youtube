@@ -1,4 +1,9 @@
 security:
+
+    role_hierarchy:
+        ROLE_EDITOR: ROLE_USER
+        ROLE_ADMIN: ROLE_EDITOR
+
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
@@ -11,20 +16,20 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        login:
-            pattern: ^/api/v1/auth/login
-            stateless: true
-            json_login:
-                check_path: /api/v1/auth/login
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
         api:
             pattern: ^/api
             stateless: true
+            entry_point: jwt
+            json_login:
+                check_path: api_login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
             jwt: ~
+            refresh_jwt:
+                check_path: api_refresh_token
 
     access_control:
-        - { path: ^/api/v1/user, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/v1/user, roles: ROLE_USER }
         - { path: ^/api,       roles: PUBLIC_ACCESS }
 
 when@test:
