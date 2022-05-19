@@ -1,8 +1,8 @@
 security:
 
     role_hierarchy:
-        ROLE_EDITOR: ROLE_USER
-        ROLE_ADMIN: ROLE_EDITOR
+        ROLE_AUTHOR: ROLE_USER
+        ROLE_ADMIN: ROLE_AUTHOR
 
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
@@ -29,6 +29,8 @@ security:
                 check_path: api_refresh_token
 
     access_control:
+        - { path: ^/api/v1/admin, roles: ROLE_ADMIN }
+        - { path: ^/api/v1/author, roles: ROLE_AUTHOR }
         - { path: ^/api/v1/user, roles: ROLE_USER }
         - { path: ^/api,       roles: PUBLIC_ACCESS }
 

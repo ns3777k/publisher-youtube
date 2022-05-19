@@ -4,7 +4,6 @@ namespace App\Service;
 
 use App\Entity\User;
 use App\Exception\UserAlreadyExistsException;
-use App\Model\IdResponse;
 use App\Model\SignUpRequest;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
