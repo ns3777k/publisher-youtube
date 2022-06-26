@@ -17,6 +17,7 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @OA\Tag(name="Admin API")
      * @OA\Response(
      *     response=200,
      *     description="Grants ROLE_AUTHOR to a user"
