@@ -1,0 +1,2 @@
+lexik_jwt_authentication:
+    token_ttl: 50000000

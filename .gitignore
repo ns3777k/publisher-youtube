@@ -1,3 +1,4 @@
+/public/upload
 .DS_Store
 ###> symfony/framework-bundle ###
 /.env.local
