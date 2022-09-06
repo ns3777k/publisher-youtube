@@ -15,6 +15,8 @@ parameters:
         App\Exception\BookNotFoundException: { code: 404, hidden: false }
         App\Exception\UserNotFoundException: { code: 404, hidden: false }
         App\Exception\UploadFileInvalidTypeException: { code: 404, hidden: false }
+        App\Exception\BookCategoryNotEmptyException: { code: 400, hidden: false }
+        App\Exception\BookCategoryAlreadyExistsException: { code: 409, hidden: false }
 
 services:
     # default configuration for services in *this* file
