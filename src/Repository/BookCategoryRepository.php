@@ -21,6 +21,41 @@ class BookCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, BookCategory::class);
     }
 
+    public function save(BookCategory $bookCategory): void
+    {
+        $this->_em->persist($bookCategory);
+    }
+
+    public function remove(BookCategory $bookCategory): void
+    {
+        $this->_em->remove($bookCategory);
+    }
+
+    public function saveAndCommit(BookCategory $bookCategory): void
+    {
+        $this->save($bookCategory);
+        $this->commit();
+    }
+
+    public function removeAndCommit(BookCategory $bookCategory): void
+    {
+        $this->remove($bookCategory);
+        $this->commit();
+    }
+
+    public function commit(): void
+    {
+        $this->_em->flush();
+    }
+
+    /**
+     * @return BookCategory[]
+     */
+    public function findBookCategoriesByIds(array $ids): array
+    {
+        return $this->findBy(['id' => $ids]);
+    }
+
     /**
      * @return BookCategory[]
      */
