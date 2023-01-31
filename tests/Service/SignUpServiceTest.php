@@ -8,7 +8,6 @@ use App\Model\SignUpRequest;
 use App\Repository\UserRepository;
 use App\Service\SignUpService;
 use App\Tests\AbstractTestCase;
-use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Http\Authentication\AuthenticationSuccessHandler;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
@@ -19,8 +18,6 @@ class SignUpServiceTest extends AbstractTestCase
 
     private UserRepository $userRepository;
 
-    private EntityManagerInterface $em;
-
     private AuthenticationSuccessHandler $successHandler;
 
     protected function setUp(): void
@@ -29,13 +26,12 @@ class SignUpServiceTest extends AbstractTestCase
 
         $this->hasher = $this->createMock(UserPasswordHasher::class);
         $this->userRepository = $this->createMock(UserRepository::class);
-        $this->em = $this->createMock(EntityManagerInterface::class);
         $this->successHandler = $this->createMock(AuthenticationSuccessHandler::class);
     }
 
     private function createService(): SignUpService
     {
-        return new SignUpService($this->hasher, $this->userRepository, $this->em, $this->successHandler);
+        return new SignUpService($this->hasher, $this->userRepository, $this->successHandler);
     }
 
     public function testSignUpUserAlreadyExists(): void
@@ -72,8 +68,9 @@ class SignUpServiceTest extends AbstractTestCase
             ->with($expectedHasherUser, 'testtest')
             ->willReturn('hashed_password');
 
-        $this->em->expects($this->once())->method('persist')->with($expectedUser);
-        $this->em->expects($this->once())->method('flush');
+        $this->userRepository->expects($this->once())
+            ->method('saveAndCommit')
+            ->with($expectedUser);
 
         $this->successHandler->expects($this->once())
             ->method('handleAuthenticationSuccess')

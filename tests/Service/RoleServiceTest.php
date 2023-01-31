@@ -6,13 +6,10 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Service\RoleService;
 use App\Tests\AbstractTestCase;
-use Doctrine\ORM\EntityManagerInterface;
 
 class RoleServiceTest extends AbstractTestCase
 {
     private UserRepository $userRepository;
-
-    private EntityManagerInterface $em;
 
     private User $user;
 
@@ -27,14 +24,13 @@ class RoleServiceTest extends AbstractTestCase
             ->with(1)
             ->willReturn($this->user);
 
-        $this->em = $this->createMock(EntityManagerInterface::class);
-        $this->em->expects($this->once())
-            ->method('flush');
+        $this->userRepository->expects($this->once())
+            ->method('commit');
     }
 
     private function createService(): RoleService
     {
-        return new RoleService($this->userRepository, $this->em);
+        return new RoleService($this->userRepository);
     }
 
     public function testGrantAdmin(): void
