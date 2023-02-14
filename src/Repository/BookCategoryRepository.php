@@ -16,36 +16,11 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BookCategoryRepository extends ServiceEntityRepository
 {
+    use RepositoryModifyTrait;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, BookCategory::class);
-    }
-
-    public function save(BookCategory $bookCategory): void
-    {
-        $this->_em->persist($bookCategory);
-    }
-
-    public function remove(BookCategory $bookCategory): void
-    {
-        $this->_em->remove($bookCategory);
-    }
-
-    public function saveAndCommit(BookCategory $bookCategory): void
-    {
-        $this->save($bookCategory);
-        $this->commit();
-    }
-
-    public function removeAndCommit(BookCategory $bookCategory): void
-    {
-        $this->remove($bookCategory);
-        $this->commit();
-    }
-
-    public function commit(): void
-    {
-        $this->_em->flush();
     }
 
     /**

@@ -14,6 +14,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class SubscriberRepository extends ServiceEntityRepository
 {
+    use RepositoryModifyTrait;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Subscriber::class);
@@ -22,21 +24,5 @@ class SubscriberRepository extends ServiceEntityRepository
     public function existsByEmail(string $email): bool
     {
         return null !== $this->findOneBy(['email' => $email]);
-    }
-
-    public function save(Subscriber $subscriber): void
-    {
-        $this->_em->persist($subscriber);
-    }
-
-    public function saveAndCommit(Subscriber $subscriber): void
-    {
-        $this->save($subscriber);
-        $this->commit();
-    }
-
-    public function commit(): void
-    {
-        $this->_em->flush();
     }
 }

@@ -13,6 +13,7 @@ parameters:
         App\Exception\BookAlreadyExistsException: { code: 409, hidden: false }
         App\Exception\RequestBodyConvertException: { code: 400, hidden: false }
         App\Exception\BookNotFoundException: { code: 404, hidden: false }
+        App\Exception\BookChapterNotFoundException: { code: 404, hidden: false }
         App\Exception\UserNotFoundException: { code: 404, hidden: false }
         App\Exception\BookFormatNotFoundException: { code: 404, hidden: false }
         App\Exception\UploadFileInvalidTypeException: { code: 404, hidden: false }
