@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+/*
+ * Made for YouTube channel https://www.youtube.com/@eazy-dev
+ */
+
 namespace App\Service\Recommendation;
 
 use App\Service\Recommendation\Exception\AccessDeniedException;

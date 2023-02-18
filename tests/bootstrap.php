@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+/*
+ * Made for YouTube channel https://www.youtube.com/@eazy-dev
+ */
+
 use Symfony\Component\Dotenv\Dotenv;
 
 require dirname(__DIR__).'/vendor/autoload.php';

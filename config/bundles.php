@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+/*
+ * Made for YouTube channel https://www.youtube.com/@eazy-dev
+ */
+
 return [
     Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
     Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
