@@ -4,8 +4,6 @@ namespace App\Model;
 
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
-use App\Model\ErrorDebugDetails;
-use App\Model\ErrorValidationDetails;
 
 class ErrorResponse
 {

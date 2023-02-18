@@ -16,6 +16,7 @@ class BookService
     public function __construct(
         private BookRepository $bookRepository,
         private BookCategoryRepository $bookCategoryRepository,
+        private BookChapterService $bookChapterService,
         private RatingService $ratingService)
     {
     }
@@ -27,7 +28,12 @@ class BookService
         }
 
         return new BookListResponse(array_map(
-            fn (Book $book) => BookMapper::map($book, new BookListItem()),
+            function (Book $book) {
+                $item = new BookListItem();
+                BookMapper::map($book, $item);
+
+                return $item;
+            },
             $this->bookRepository->findPublishedBooksByCategoryId($categoryId)
         ));
     }
@@ -36,11 +42,15 @@ class BookService
     {
         $book = $this->bookRepository->getPublishedById($id);
         $rating = $this->ratingService->calcReviewRatingForBook($id);
+        $details = new BookDetails();
 
-        return BookMapper::map($book, new BookDetails())
+        BookMapper::map($book, $details);
+
+        return $details
             ->setRating($rating->getRating())
             ->setReviews($rating->getTotal())
             ->setFormats(BookMapper::mapFormats($book))
-            ->setCategories(BookMapper::mapCategories($book));
+            ->setCategories(BookMapper::mapCategories($book))
+            ->setChapters($this->bookChapterService->getChaptersTree($book)->getItems());
     }
 }

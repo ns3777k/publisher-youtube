@@ -8,7 +8,6 @@ use App\Exception\BookChapterInvalidSortException;
 use App\Model\Author\CreateBookChapterRequest;
 use App\Model\Author\UpdateBookChapterRequest;
 use App\Model\Author\UpdateBookChapterSortRequest;
-use App\Model\BookChapter as BookChapterModel;
 use App\Model\BookChapterTreeResponse;
 use App\Model\IdResponse;
 use App\Repository\BookChapterRepository;
@@ -26,6 +25,7 @@ class AuthorBookChapterService
     public function __construct(
         private BookRepository $bookRepository,
         private BookChapterRepository $bookChapterRepository,
+        private BookChapterService $bookChapterService,
         private SluggerInterface $slugger)
     {
     }
@@ -77,31 +77,9 @@ class AuthorBookChapterService
         $this->bookChapterRepository->removeAndCommit($chapter);
     }
 
-    /**
-     * @todo move somewhere to use from BookService
-     */
     public function getChaptersTree(int $bookId): BookChapterTreeResponse
     {
-        $book = $this->bookRepository->getBookById($bookId);
-        $chapters = $this->bookChapterRepository->findSortedChaptersByBook($book);
-        $response = new BookChapterTreeResponse();
-        /** @var array<int, BookChapterModel> $index */
-        $index = [];
-
-        foreach ($chapters as $chapter) {
-            $model = new BookChapterModel($chapter->getId(), $chapter->getTitle(), $chapter->getSlug());
-            $index[$chapter->getId()] = $model;
-
-            if (!$chapter->hasParent()) {
-                $response->addItem($model);
-                continue;
-            }
-
-            $parent = $chapter->getParent();
-            $index[$parent->getId()]->addItem($model);
-        }
-
-        return $response;
+        return $this->bookChapterService->getChaptersTree($this->bookRepository->getBookById($bookId));
     }
 
     public function updateChapterSort(UpdateBookChapterSortRequest $request): void

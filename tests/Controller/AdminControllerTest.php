@@ -3,6 +3,7 @@
 namespace App\Tests\Controller;
 
 use App\Tests\AbstractControllerTest;
+use App\Tests\MockUtils;
 
 class AdminControllerTest extends AbstractControllerTest
 {
@@ -10,12 +11,52 @@ class AdminControllerTest extends AbstractControllerTest
     {
         $user = $this->createUser('user@test.com', 'testtest');
 
-        $username = 'admin@test.com';
-        $password = 'testtest';
-        $this->createAdmin($username, $password);
-        $this->auth($username, $password);
-
+        $this->createAdminAndAuth('admin@test.com', 'testtest');
         $this->client->request('POST', '/api/v1/admin/grantAuthor/'.$user->getId());
+
+        $this->assertResponseIsSuccessful();
+    }
+
+    public function testDeleteCategory(): void
+    {
+        $bookCategory = MockUtils::createBookCategory();
+        $this->em->persist($bookCategory);
+        $this->em->flush();
+
+        $this->createAdminAndAuth('user@test.com', 'testtest');
+        $this->client->request('DELETE', '/api/v1/admin/bookCategory/'.$bookCategory->getId());
+
+        $this->assertResponseIsSuccessful();
+    }
+
+    public function testCreateCategory(): void
+    {
+        $this->createAdminAndAuth('user@test.com', 'testtest');
+        $this->client->request('POST', '/api/v1/admin/bookCategory', [], [], [], json_encode([
+            'title' => 'Test Chapter',
+        ]));
+
+        $responseContent = json_decode($this->client->getResponse()->getContent());
+
+        $this->assertResponseIsSuccessful();
+        $this->assertJsonDocumentMatchesSchema($responseContent, [
+            'type' => 'object',
+            'required' => ['id'],
+            'properties' => [
+                'id' => ['type' => 'integer'],
+            ],
+        ]);
+    }
+
+    public function testUpdateCategory(): void
+    {
+        $bookCategory = MockUtils::createBookCategory();
+        $this->em->persist($bookCategory);
+        $this->em->flush();
+
+        $this->createAdminAndAuth('user@test.com', 'testtest');
+        $this->client->request('POST', '/api/v1/admin/bookCategory/'.$bookCategory->getId(), [], [], [],
+            json_encode(['title' => 'Test Chapter 2']));
 
         $this->assertResponseIsSuccessful();
     }

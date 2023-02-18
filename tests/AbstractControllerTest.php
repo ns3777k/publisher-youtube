@@ -68,6 +68,30 @@ abstract class AbstractControllerTest extends WebTestCase
         return $this->createUserWithRoles($username, $password, ['ROLE_AUTHOR']);
     }
 
+    protected function createAdminAndAuth(string $username, string $password): User
+    {
+        $user = $this->createAdmin($username, $password);
+        $this->auth($username, $password);
+
+        return $user;
+    }
+
+    protected function createAuthorAndAuth(string $username, string $password): User
+    {
+        $user = $this->createAuthor($username, $password);
+        $this->auth($username, $password);
+
+        return $user;
+    }
+
+    protected function createUserAndAuth(string $username, string $password): User
+    {
+        $user = $this->createUser($username, $password);
+        $this->auth($username, $password);
+
+        return $user;
+    }
+
     private function createUserWithRoles(string $username, string $password, array $roles): User
     {
         $user = (new User())

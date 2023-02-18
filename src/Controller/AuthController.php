@@ -3,14 +3,14 @@
 namespace App\Controller;
 
 use App\Attribute\RequestBody;
+use App\Model\ErrorResponse;
 use App\Model\SignUpRequest;
 use App\Service\SignUpService;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Annotations as OA;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use App\Model\ErrorResponse;
 
 class AuthController extends AbstractController
 {

@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
+use App\Model\RecommendedBookListResponse;
 use App\Service\RecommendationService;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Annotations as OA;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use App\Model\RecommendedBookListResponse;
 
 class RecommendationController extends AbstractController
 {

@@ -5,25 +5,20 @@ namespace App\Mapper;
 use App\Entity\Book;
 use App\Entity\BookCategory;
 use App\Entity\BookToBookFormat;
+use App\Model\BaseBookDetails;
 use App\Model\BookCategory as BookCategoryModel;
-use App\Model\BookDetails;
-use App\Model\Author\BookDetails as AuthorBookDetails;
 use App\Model\BookFormat;
-use App\Model\BookListItem;
 
 class BookMapper
 {
-    /**
-     * @todo use interface?
-     */
-    public static function map(Book $book, BookDetails|BookListItem|AuthorBookDetails $model): BookDetails|BookListItem|AuthorBookDetails
+    public static function map(Book $book, BaseBookDetails $model): void
     {
         $publicationDate = $book->getPublicationDate();
         if (null !== $publicationDate) {
             $publicationDate = $publicationDate->getTimestamp();
         }
 
-        return $model
+        $model
             ->setId($book->getId())
             ->setTitle($book->getTitle())
             ->setSlug($book->getSlug())

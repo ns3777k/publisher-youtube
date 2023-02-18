@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
+use App\Model\ReviewPage;
 use App\Service\ReviewService;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Annotations as OA;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use App\Model\ReviewPage;
 
 class ReviewController extends AbstractController
 {

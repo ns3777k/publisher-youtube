@@ -143,6 +143,7 @@ class Book
 
     /**
      * @param Collection<BookCategory> $categories
+     *
      * @return $this
      */
     public function setCategories(Collection $categories): self

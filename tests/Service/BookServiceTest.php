@@ -5,12 +5,14 @@ namespace App\Tests\Service;
 use App\Entity\Book;
 use App\Exception\BookCategoryNotFoundException;
 use App\Model\BookCategory as BookCategoryModel;
+use App\Model\BookChapterTreeResponse;
 use App\Model\BookDetails;
 use App\Model\BookFormat as BookFormatModel;
 use App\Model\BookListItem;
 use App\Model\BookListResponse;
 use App\Repository\BookCategoryRepository;
 use App\Repository\BookRepository;
+use App\Service\BookChapterService;
 use App\Service\BookService;
 use App\Service\Rating;
 use App\Service\RatingService;
@@ -24,6 +26,8 @@ class BookServiceTest extends AbstractTestCase
 
     private BookRepository $bookRepository;
 
+    private BookChapterService $bookChapterService;
+
     private BookCategoryRepository $bookCategoryRepository;
 
     protected function setUp(): void
@@ -32,6 +36,7 @@ class BookServiceTest extends AbstractTestCase
 
         $this->bookRepository = $this->createMock(BookRepository::class);
         $this->bookCategoryRepository = $this->createMock(BookCategoryRepository::class);
+        $this->bookChapterService = $this->createMock(BookChapterService::class);
         $this->ratingService = $this->createMock(RatingService::class);
     }
 
@@ -66,10 +71,17 @@ class BookServiceTest extends AbstractTestCase
 
     public function testGetBookById(): void
     {
+        $book = $this->createBookEntity();
+
+        $this->bookChapterService->expects($this->once())
+            ->method('getChaptersTree')
+            ->with($book)
+            ->willReturn(new BookChapterTreeResponse());
+
         $this->bookRepository->expects($this->once())
             ->method('getPublishedById')
             ->with(123)
-            ->willReturn($this->createBookEntity());
+            ->willReturn($book);
 
         $this->ratingService->expects($this->once())
             ->method('calcReviewRatingForBook')
@@ -95,7 +107,8 @@ class BookServiceTest extends AbstractTestCase
                 new BookCategoryModel(1, 'Devices', 'devices'),
             ])
             ->setPublicationDate(1602288000)
-            ->setFormats([$format]);
+            ->setFormats([$format])
+            ->setChapters([]);
 
         $this->assertEquals($expected, $this->createBookService()->getBookById(123));
     }
@@ -105,7 +118,8 @@ class BookServiceTest extends AbstractTestCase
         return new BookService(
             $this->bookRepository,
             $this->bookCategoryRepository,
-            $this->ratingService
+            $this->bookChapterService,
+            $this->ratingService,
         );
     }
 

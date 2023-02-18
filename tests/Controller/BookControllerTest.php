@@ -81,7 +81,7 @@ class BookControllerTest extends AbstractControllerTest
             'type' => 'object',
             'required' => [
                 'id', 'title', 'slug', 'image', 'authors', 'publicationDate', 'rating', 'reviews',
-                'categories', 'formats',
+                'categories', 'formats', 'chapters',
             ],
             'properties' => [
                 'title' => ['type' => 'string'],
@@ -95,6 +95,18 @@ class BookControllerTest extends AbstractControllerTest
                 ],
                 'rating' => ['type' => 'number'],
                 'reviews' => ['type' => 'integer'],
+                'chapters' => [
+                    'type' => 'array',
+                    'items' => [
+                        'type' => 'object',
+                        'required' => ['id', 'title', 'slug', 'items'],
+                        'properties' => [
+                            'title' => ['type' => 'string'],
+                            'slug' => ['type' => 'string'],
+                            'id' => ['type' => 'integer'],
+                        ],
+                    ],
+                ],
                 'categories' => [
                     'type' => 'array',
                     'items' => [

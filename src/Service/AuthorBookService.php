@@ -81,7 +81,9 @@ class AuthorBookService
             ->setFormats(BookMapper::mapFormats($book))
             ->setCategories(BookMapper::mapCategories($book));
 
-        return BookMapper::map($book, $bookDetails);
+        BookMapper::map($book, $bookDetails);
+
+        return $bookDetails;
     }
 
     public function updateBook(int $id, UpdateBookRequest $request): void

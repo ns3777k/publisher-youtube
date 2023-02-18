@@ -144,7 +144,7 @@ class AuthorBookServiceTest extends AbstractTestCase
             ->setPublicationDate(1602288000)
             ->setAuthors(['Tester'])
             ->setCategories([
-                new BookCategory(1, 'Devices', 'devices')
+                new BookCategory(1, 'Devices', 'devices'),
             ])
             ->setFormats([
                 (new BookFormat())->setId(1)->setTitle('format')
