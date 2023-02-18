@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Entity\Book;
@@ -50,7 +52,7 @@ class AuthorBookChapterService
 
         $chapter = (new BookChapter())
             ->setTitle($title)
-            ->setSlug($this->slugger->slug($title))
+            ->setSlug($this->slugger->slug($title)->toString())
             ->setParent($parent)
             ->setLevel($level)
             ->setSort($this->getNextMaxSort($book, $level))
@@ -65,7 +67,7 @@ class AuthorBookChapterService
     {
         $chapter = $this->bookChapterRepository->getById($request->getId());
         $title = $request->getTitle();
-        $chapter->setTitle($title)->setSlug($this->slugger->slug($title));
+        $chapter->setTitle($title)->setSlug($this->slugger->slug($title)->toString());
 
         $this->bookChapterRepository->commit();
     }

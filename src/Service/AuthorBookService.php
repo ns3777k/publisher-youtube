@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Entity\Book;
@@ -131,11 +133,11 @@ class AuthorBookService
     private function slugifyOfThrow(string $title): string
     {
         $slug = $this->slugger->slug($title);
-        if ($this->bookRepository->existsBySlug($slug)) {
+        if ($this->bookRepository->existsBySlug($slug->toString())) {
             throw new BookAlreadyExistsException();
         }
 
-        return $slug;
+        return $slug->toString();
     }
 
     private function map(Book $book): BookListItem

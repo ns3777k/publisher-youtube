@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Entity\BookCategory;
@@ -61,11 +63,11 @@ class BookCategoryService
     private function upsertCategory(BookCategory $category, BookCategoryUpdateRequest $updateRequest): void
     {
         $slug = $this->slugger->slug($updateRequest->getTitle());
-        if ($this->bookCategoryRepository->existsBySlug($slug)) {
+        if ($this->bookCategoryRepository->existsBySlug($slug->toString())) {
             throw new BookCategoryAlreadyExistsException();
         }
 
-        $category->setTitle($updateRequest->getTitle())->setSlug($slug);
+        $category->setTitle($updateRequest->getTitle())->setSlug($slug->toString());
 
         $this->bookCategoryRepository->saveAndCommit($category);
     }

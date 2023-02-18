@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Entity\Review;
@@ -33,7 +35,7 @@ class ReviewService
             ->setTotal($total)
             ->setPage($page)
             ->setPerPage(self::PAGE_LIMIT)
-            ->setPages(ceil($total / self::PAGE_LIMIT))
+            ->setPages((int) ceil($total / self::PAGE_LIMIT))
             ->setItems($items);
     }
 
