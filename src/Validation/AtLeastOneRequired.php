@@ -22,9 +22,9 @@ class AtLeastOneRequired extends Constraint
 
     public string $message = 'At least one of {{ fields }} is required.';
 
-    public const ONE_REQUIRED_ERROR = '37be695d-786b-4bae-bf45-bd5a1aabf0f7';
+    final public const ONE_REQUIRED_ERROR = '37be695d-786b-4bae-bf45-bd5a1aabf0f7';
 
-    protected static $errorNames = [
+    protected const ERROR_NAMES = [
         self::ONE_REQUIRED_ERROR => 'ONE_REQUIRED_ERROR',
     ];
 
@@ -36,7 +36,7 @@ class AtLeastOneRequired extends Constraint
         $payload = null)
     {
         if (!empty($options) && array_is_list($options)) {
-            $requiredFields = $requiredFields ?? $options;
+            $requiredFields ??= $options;
             $options = [];
         }
 

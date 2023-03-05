@@ -12,7 +12,7 @@ use App\Repository\UserRepository;
 
 class RoleService
 {
-    public function __construct(private UserRepository $userRepository)
+    public function __construct(private readonly UserRepository $userRepository)
     {
     }
 

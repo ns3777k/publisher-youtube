@@ -14,13 +14,13 @@ class BookFormat
 
     private string $title;
 
-    private ?string $description;
+    private ?string $description = null;
 
-    private ?string $comment;
+    private ?string $comment = null;
 
     private float $price;
 
-    private ?int $discountPercent;
+    private ?int $discountPercent = null;
 
     public function getId(): int
     {

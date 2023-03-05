@@ -35,8 +35,6 @@ class ReviewPage
 
     /**
      * @param Review[] $items
-     *
-     * @return ReviewPage
      */
     public function setItems(array $items): self
     {

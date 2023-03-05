@@ -14,9 +14,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class AuthorBookVoter extends Voter
 {
-    public const IS_AUTHOR = 'IS_AUTHOR';
+    final public const IS_AUTHOR = 'IS_AUTHOR';
 
-    public function __construct(private BookRepository $bookRepository)
+    public function __construct(private readonly BookRepository $bookRepository)
     {
     }
 

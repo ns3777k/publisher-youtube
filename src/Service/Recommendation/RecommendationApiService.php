@@ -20,7 +20,7 @@ use Throwable;
 
 class RecommendationApiService
 {
-    public function __construct(private HttpClientInterface $recommendationClient, private SerializerInterface $serializer)
+    public function __construct(private readonly HttpClientInterface $recommendationClient, private readonly SerializerInterface $serializer)
     {
     }
 

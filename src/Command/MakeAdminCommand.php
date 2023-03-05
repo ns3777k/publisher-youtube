@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'app:makeAdmin', description: 'Promotes user to be admin')]
 class MakeAdminCommand extends Command
 {
-    public function __construct(private RoleService $roleService)
+    public function __construct(private readonly RoleService $roleService)
     {
         parent::__construct();
     }

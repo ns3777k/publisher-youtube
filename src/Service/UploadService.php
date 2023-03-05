@@ -17,7 +17,7 @@ class UploadService
 {
     private const LINK_BOOK_PATTERN = '/upload/book/%d/%s';
 
-    public function __construct(private Filesystem $fs, private string $uploadDir)
+    public function __construct(private readonly Filesystem $fs, private readonly string $uploadDir)
     {
     }
 

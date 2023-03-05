@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class AtLeastOneRequiredValidator extends ConstraintValidator
 {
-    private PropertyAccessorInterface $propertyAccessor;
+    private readonly PropertyAccessorInterface $propertyAccessor;
 
     public function __construct(PropertyAccessorInterface $propertyAccessor = null)
     {
@@ -29,9 +29,7 @@ class AtLeastOneRequiredValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, AtLeastOneRequired::class);
         }
 
-        $passed = array_filter($constraint->requiredFields, function (string $required) use ($object) {
-            return null !== $this->propertyAccessor->getValue($object, $required);
-        });
+        $passed = array_filter($constraint->requiredFields, fn(string $required) => null !== $this->propertyAccessor->getValue($object, $required));
 
         if (!empty($passed)) {
             return;

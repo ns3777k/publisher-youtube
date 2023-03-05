@@ -21,7 +21,7 @@ class Book
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255)]
     private string $title;
@@ -30,19 +30,19 @@ class Book
     private string $slug;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $image;
+    private ?string $image = null;
 
     #[ORM\Column(type: 'simple_array', nullable: true)]
     private ?array $authors;
 
     #[ORM\Column(type: 'string', length: 13, nullable: true)]
-    private ?string $isbn;
+    private ?string $isbn = null;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $description;
+    private ?string $description = null;
 
     #[ORM\Column(type: 'date_immutable', nullable: true)]
-    private ?DateTimeInterface $publicationDate;
+    private ?DateTimeInterface $publicationDate = null;
 
     #[ORM\JoinColumn(nullable: false)]
     #[ORM\ManyToOne(targetEntity: User::class)]

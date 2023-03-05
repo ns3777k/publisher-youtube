@@ -178,8 +178,8 @@ class AuthorBookChapterServiceTest extends AbstractTestCase
         $this->bookChapterRepository->expects($this->once())
             ->method('commit');
 
-        $payload = (new UpdateBookChapterRequest())->setId(1)->setTitle($newTitle);
-        $this->createService()->updateChapter($payload);
+        $payload = (new UpdateBookChapterRequest())->setTitle($newTitle);
+        $this->createService()->updateChapter($payload, 1);
 
         $this->assertEquals($newTitle, $chapter->getTitle());
         $this->assertEquals($newSlug, $chapter->getSlug());
@@ -239,8 +239,8 @@ class AuthorBookChapterServiceTest extends AbstractTestCase
         $this->bookChapterRepository->expects($this->once())
             ->method('commit');
 
-        $payload = (new UpdateBookChapterSortRequest())->setId(1)->setNextId(null)->setPreviousId(5);
-        $this->createService()->updateChapterSort($payload);
+        $payload = (new UpdateBookChapterSortRequest())->setNextId(null)->setPreviousId(5);
+        $this->createService()->updateChapterSort($payload, 1);
 
         $this->assertEquals(2, $chapter->getLevel());
         $this->assertEquals(6, $chapter->getSort());
@@ -266,8 +266,8 @@ class AuthorBookChapterServiceTest extends AbstractTestCase
         $this->bookChapterRepository->expects($this->once())
             ->method('commit');
 
-        $payload = (new UpdateBookChapterSortRequest())->setId(1)->setNextId(5)->setPreviousId(null);
-        $this->createService()->updateChapterSort($payload);
+        $payload = (new UpdateBookChapterSortRequest())->setNextId(5)->setPreviousId(null);
+        $this->createService()->updateChapterSort($payload, 1);
 
         $this->assertEquals(2, $chapter->getLevel());
         $this->assertEquals(8, $chapter->getSort());

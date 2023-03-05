@@ -23,7 +23,7 @@ class AuthorControllerTest extends AbstractControllerTest
             'title' => 'Test Book',
         ]));
 
-        $responseContent = json_decode($this->client->getResponse()->getContent());
+        $responseContent = json_decode($this->client->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonDocumentMatchesSchema($responseContent, [
@@ -60,7 +60,7 @@ class AuthorControllerTest extends AbstractControllerTest
             'cover' => $uploadedFile,
         ]);
 
-        $responseContent = json_decode($this->client->getResponse()->getContent());
+        $responseContent = json_decode($this->client->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonDocumentMatchesSchema($responseContent, [
@@ -146,7 +146,7 @@ class AuthorControllerTest extends AbstractControllerTest
 
         $this->client->request('GET', '/api/v1/author/books');
 
-        $responseContent = json_decode($this->client->getResponse()->getContent());
+        $responseContent = json_decode($this->client->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonDocumentMatchesSchema($responseContent, [
@@ -186,7 +186,7 @@ class AuthorControllerTest extends AbstractControllerTest
 
         $this->client->request('GET', '/api/v1/author/book/'.$book->getId());
 
-        $responseContent = json_decode($this->client->getResponse()->getContent());
+        $responseContent = json_decode($this->client->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonDocumentMatchesSchema($responseContent, [
@@ -248,7 +248,7 @@ class AuthorControllerTest extends AbstractControllerTest
         $this->client->request('POST', '/api/v1/author/book/'.$book->getId().'/chapter', [], [], [],
             json_encode(['title' => 'Test Book']));
 
-        $responseContent = json_decode($this->client->getResponse()->getContent());
+        $responseContent = json_decode($this->client->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonDocumentMatchesSchema($responseContent, [
@@ -270,8 +270,9 @@ class AuthorControllerTest extends AbstractControllerTest
         $this->em->persist($chapter);
         $this->em->flush();
 
-        $this->client->request('POST', '/api/v1/author/book/'.$book->getId().'/updateChapter', [], [], [],
-            json_encode(['title' => 'Updated Book Chapter', 'id' => $chapter->getId()]));
+        $url = '/api/v1/author/book/'.$book->getId().'/chapter/'.$chapter->getId();
+        $this->client->request('POST', $url, [], [], [],
+            json_encode(['title' => 'Updated Book Chapter'], JSON_THROW_ON_ERROR));
 
         $this->assertResponseIsSuccessful();
     }
@@ -290,12 +291,12 @@ class AuthorControllerTest extends AbstractControllerTest
         $this->em->persist($chapterThird);
         $this->em->flush();
 
-        $this->client->request('POST', '/api/v1/author/book/'.$book->getId().'/chapterSort', [], [], [],
+        $url = '/api/v1/author/book/'.$book->getId().'/chapter/'.$chapterFirst->getId().'/sort';
+        $this->client->request('POST', $url, [], [], [],
             json_encode([
-                'id' => $chapterFirst->getId(),
                 'nextId' => $chapterThird->getId(),
                 'previousId' => $chapterSecond->getId(),
-            ]));
+            ], JSON_THROW_ON_ERROR));
 
         $this->assertResponseIsSuccessful();
     }
@@ -317,7 +318,7 @@ class AuthorControllerTest extends AbstractControllerTest
 
         $this->client->request('GET', '/api/v1/author/book/'.$book->getId().'/chapters');
 
-        $responseContent = json_decode($this->client->getResponse()->getContent());
+        $responseContent = json_decode($this->client->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonDocumentMatchesSchema($responseContent, [

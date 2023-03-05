@@ -3,3 +3,9 @@ api_login_check:
 
 api_refresh_token:
     path: /api/v1/auth/refresh
+
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute

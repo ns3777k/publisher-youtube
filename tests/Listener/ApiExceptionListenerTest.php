@@ -43,7 +43,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
     {
         $mapping = ExceptionMapping::fromCode(Response::HTTP_NOT_FOUND);
         $responseMessage = Response::$statusTexts[$mapping->getCode()];
-        $responseBody = json_encode(['error' => $responseMessage]);
+        $responseBody = json_encode(['error' => $responseMessage], JSON_THROW_ON_ERROR);
 
         $this->resolver->expects($this->once())
             ->method('resolve')
@@ -115,7 +115,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
     {
         $mapping = ExceptionMapping::fromCode(Response::HTTP_GATEWAY_TIMEOUT);
         $responseMessage = Response::$statusTexts[$mapping->getCode()];
-        $responseBody = json_encode(['error' => $responseMessage]);
+        $responseBody = json_encode(['error' => $responseMessage], JSON_THROW_ON_ERROR);
 
         $this->resolver->expects($this->once())
             ->method('resolve')
@@ -141,7 +141,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
     public function test500IsDefaultWhenMappingNotFound(): void
     {
         $responseMessage = Response::$statusTexts[Response::HTTP_INTERNAL_SERVER_ERROR];
-        $responseBody = json_encode(['error' => $responseMessage]);
+        $responseBody = json_encode(['error' => $responseMessage], JSON_THROW_ON_ERROR);
 
         $this->resolver->expects($this->once())
             ->method('resolve')

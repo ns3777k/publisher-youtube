@@ -32,20 +32,11 @@ class RequestFileArgumentResolverTest extends AbstractTestCase
         $this->validator = $this->createMock(ValidatorInterface::class);
     }
 
-    public function testSupports(): void
-    {
-        $meta = new ArgumentMetadata('some', null, false, false, null, false, [
-            new RequestFile('file', []),
-        ]);
-
-        $this->assertTrue($this->createResolver()->supports(new Request(), $meta));
-    }
-
     public function testNotSupports(): void
     {
         $meta = new ArgumentMetadata('some', null, false, false, null);
 
-        $this->assertFalse($this->createResolver()->supports(new Request(), $meta));
+        $this->assertEmpty($this->createResolver()->resolve(new Request(), $meta));
     }
 
     public function testResolveThrowsWhenValidationFails(): void
@@ -67,7 +58,7 @@ class RequestFileArgumentResolverTest extends AbstractTestCase
                 new ConstraintViolation('error', null, [], null, 'some', null),
             ]));
 
-        $this->createResolver()->resolve($request, $meta)->next();
+        $this->createResolver()->resolve($request, $meta);
     }
 
     public function testResolveThrowsWhenConstraintFails(): void
@@ -90,7 +81,7 @@ class RequestFileArgumentResolverTest extends AbstractTestCase
                 new ConstraintViolation('error', null, [], null, 'some', null),
             ]));
 
-        $this->createResolver()->resolve($request, $meta)->next();
+        $this->createResolver()->resolve($request, $meta);
     }
 
     public function testResolve(): void
@@ -110,7 +101,7 @@ class RequestFileArgumentResolverTest extends AbstractTestCase
 
         $actual = $this->createResolver()->resolve($request, $meta);
 
-        $this->assertEquals($file, $actual->current());
+        $this->assertEquals($file, $actual[0]);
     }
 
     private function createResolver(): RequestFileArgumentResolver

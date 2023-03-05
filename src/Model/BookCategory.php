@@ -10,17 +10,8 @@ namespace App\Model;
 
 class BookCategory
 {
-    private int $id;
-
-    private string $title;
-
-    private string $slug;
-
-    public function __construct(int $id, string $title, string $slug)
+    public function __construct(private readonly int $id, private readonly string $title, private readonly string $slug)
     {
-        $this->id = $id;
-        $this->title = $title;
-        $this->slug = $slug;
     }
 
     public function getId(): int

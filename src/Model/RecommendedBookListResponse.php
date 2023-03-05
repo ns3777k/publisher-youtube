@@ -11,16 +11,10 @@ namespace App\Model;
 class RecommendedBookListResponse
 {
     /**
-     * @var RecommendedBook[]
-     */
-    private array $items;
-
-    /**
      * @param RecommendedBook[] $items
      */
-    public function __construct(array $items)
+    public function __construct(private readonly array $items)
     {
-        $this->items = $items;
     }
 
     /**

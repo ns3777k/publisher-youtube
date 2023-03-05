@@ -10,7 +10,7 @@ namespace App\Model;
 
 class IdResponse
 {
-    public function __construct(private int $id)
+    public function __construct(private readonly int $id)
     {
     }
 

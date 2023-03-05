@@ -15,7 +15,7 @@ use App\Repository\SubscriberRepository;
 
 class SubscriberService
 {
-    public function __construct(private SubscriberRepository $subscriberRepository)
+    public function __construct(private readonly SubscriberRepository $subscriberRepository)
     {
     }
 

@@ -53,7 +53,7 @@ class RecommendationControllerTest extends AbstractControllerTest
         );
 
         $this->client->request('GET', '/api/v1/book/123/recommendations');
-        $responseContent = json_decode($this->client->getResponse()->getContent(), true);
+        $responseContent = json_decode($this->client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonDocumentMatchesSchema($responseContent, [

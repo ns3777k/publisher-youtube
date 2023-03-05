@@ -17,13 +17,13 @@ class BookToBookFormat
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private float $price;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $discountPercent;
+    private ?int $discountPercent = null;
 
     #[ORM\JoinColumn(nullable: false)]
     #[ORM\ManyToOne(targetEntity: Book::class, inversedBy: 'formats')]

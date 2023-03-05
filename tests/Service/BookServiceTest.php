@@ -112,7 +112,7 @@ class BookServiceTest extends AbstractTestCase
             ->setCategories([
                 new BookCategoryModel(1, 'Devices', 'devices'),
             ])
-            ->setPublicationDate(1602288000)
+            ->setPublicationDate(1_602_288_000)
             ->setFormats([$format])
             ->setChapters([]);
 
@@ -156,6 +156,6 @@ class BookServiceTest extends AbstractTestCase
             ->setSlug('test-book')
             ->setAuthors(['Tester'])
             ->setImage('http://localhost.png')
-            ->setPublicationDate(1602288000);
+            ->setPublicationDate(1_602_288_000);
     }
 }

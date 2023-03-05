@@ -17,7 +17,7 @@ class ReviewService
 {
     private const PAGE_LIMIT = 5;
 
-    public function __construct(private ReviewRepository $reviewRepository, private RatingService $ratingService)
+    public function __construct(private readonly ReviewRepository $reviewRepository, private readonly RatingService $ratingService)
     {
     }
 

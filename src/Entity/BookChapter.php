@@ -17,7 +17,7 @@ class BookChapter
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    private ?int $id = null;
 
     #[ORM\JoinColumn(nullable: false)]
     #[ORM\ManyToOne(targetEntity: Book::class)]
@@ -37,7 +37,7 @@ class BookChapter
 
     #[ORM\JoinColumn(nullable: true)]
     #[ORM\ManyToOne(targetEntity: BookChapter::class)]
-    private ?BookChapter $parent;
+    private ?BookChapter $parent = null;
 
     public function getId(): ?int
     {

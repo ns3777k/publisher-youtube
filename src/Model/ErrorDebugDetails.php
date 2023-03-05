@@ -10,7 +10,7 @@ namespace App\Model;
 
 class ErrorDebugDetails
 {
-    public function __construct(private string $trace)
+    public function __construct(private readonly string $trace)
     {
     }
 

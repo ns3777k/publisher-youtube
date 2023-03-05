@@ -25,7 +25,7 @@ class SubscribeControllerTest extends AbstractControllerTest
     {
         $content = json_encode(['email' => 'test@test.com']);
         $this->client->request('POST', '/api/v1/subscribe', [], [], [], $content);
-        $responseContent = json_decode($this->client->getResponse()->getContent());
+        $responseContent = json_decode($this->client->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
         $this->assertJsonDocumentMatches($responseContent, [

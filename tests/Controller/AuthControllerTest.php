@@ -22,7 +22,7 @@ class AuthControllerTest extends AbstractControllerTest
             'confirmPassword' => '1234567854',
         ]));
 
-        $responseContent = json_decode($this->client->getResponse()->getContent());
+        $responseContent = json_decode($this->client->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonDocumentMatchesSchema($responseContent, [

@@ -26,7 +26,7 @@ class ReviewControllerTest extends AbstractControllerTest
         $this->em->flush();
 
         $this->client->request('GET', '/api/v1/book/'.$book->getId().'/reviews');
-        $responseContent = json_decode($this->client->getResponse()->getContent(), true);
+        $responseContent = json_decode($this->client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonDocumentMatchesSchema($responseContent, [

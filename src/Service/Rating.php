@@ -10,7 +10,7 @@ namespace App\Service;
 
 class Rating
 {
-    public function __construct(private int $total, private float $rating)
+    public function __construct(private readonly int $total, private readonly float $rating)
     {
     }
 

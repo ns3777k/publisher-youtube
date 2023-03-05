@@ -11,16 +11,10 @@ namespace App\Model;
 class BookCategoryListResponse
 {
     /**
-     * @var BookCategory[]
-     */
-    private array $items;
-
-    /**
      * @param BookCategory[] $items
      */
-    public function __construct(array $items)
+    public function __construct(private readonly array $items)
     {
-        $this->items = $items;
     }
 
     /**

@@ -12,13 +12,13 @@ trait RepositoryModifyTrait
 {
     public function save(object $object): void
     {
-        assert($this->_entityName === get_class($object));
+        assert($this->_entityName === $object::class);
         $this->_em->persist($object);
     }
 
     public function remove(object $object): void
     {
-        assert($this->_entityName === get_class($object));
+        assert($this->_entityName === $object::class);
         $this->_em->remove($object);
     }
 

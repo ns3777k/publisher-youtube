@@ -20,8 +20,8 @@ class RecommendationService
     private const MAX_DESCRIPTION_LENGTH = 150;
 
     public function __construct(
-        private BookRepository $bookRepository,
-        private RecommendationApiService $recommendationApiService)
+        private readonly BookRepository $bookRepository,
+        private readonly RecommendationApiService $recommendationApiService)
     {
     }
 
@@ -33,7 +33,7 @@ class RecommendationService
         );
 
         return new RecommendedBookListResponse(
-            array_map([$this, 'map'], $this->bookRepository->findBooksByIds($ids))
+            array_map($this->map(...), $this->bookRepository->findBooksByIds($ids))
         );
     }
 

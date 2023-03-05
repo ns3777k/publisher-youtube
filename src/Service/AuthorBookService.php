@@ -31,11 +31,11 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class AuthorBookService
 {
     public function __construct(
-        private BookRepository $bookRepository,
-        private BookFormatRepository $bookFormatRepository,
-        private BookCategoryRepository $bookCategoryRepository,
-        private SluggerInterface $slugger,
-        private UploadService $uploadService)
+        private readonly BookRepository $bookRepository,
+        private readonly BookFormatRepository $bookFormatRepository,
+        private readonly BookCategoryRepository $bookCategoryRepository,
+        private readonly SluggerInterface $slugger,
+        private readonly UploadService $uploadService)
     {
     }
 
@@ -59,7 +59,7 @@ class AuthorBookService
     public function getBooks(UserInterface $user): BookListResponse
     {
         return new BookListResponse(
-            array_map([$this, 'map'],
+            array_map($this->map(...),
             $this->bookRepository->findUserBooks($user))
         );
     }

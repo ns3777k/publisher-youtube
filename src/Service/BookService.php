@@ -20,10 +20,10 @@ use App\Repository\BookRepository;
 class BookService
 {
     public function __construct(
-        private BookRepository $bookRepository,
-        private BookCategoryRepository $bookCategoryRepository,
-        private BookChapterService $bookChapterService,
-        private RatingService $ratingService)
+        private readonly BookRepository $bookRepository,
+        private readonly BookCategoryRepository $bookCategoryRepository,
+        private readonly BookChapterService $bookChapterService,
+        private readonly RatingService $ratingService)
     {
     }
 

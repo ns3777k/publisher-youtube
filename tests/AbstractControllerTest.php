@@ -50,11 +50,11 @@ abstract class AbstractControllerTest extends WebTestCase
             [],
             [],
             ['CONTENT_TYPE' => 'application/json'],
-            json_encode(['username' => $username, 'password' => $password])
+            json_encode(['username' => $username, 'password' => $password], JSON_THROW_ON_ERROR)
         );
 
         $this->assertResponseIsSuccessful();
-        $data = json_decode($this->client->getResponse()->getContent(), true);
+        $data = json_decode($this->client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
         $this->client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $data['token']));
     }

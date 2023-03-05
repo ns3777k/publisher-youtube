@@ -29,10 +29,10 @@ class AuthorBookChapterService
     private const SORT_STEP = 1;
 
     public function __construct(
-        private BookRepository $bookRepository,
-        private BookChapterRepository $bookChapterRepository,
-        private BookChapterService $bookChapterService,
-        private SluggerInterface $slugger)
+        private readonly BookRepository $bookRepository,
+        private readonly BookChapterRepository $bookChapterRepository,
+        private readonly BookChapterService $bookChapterService,
+        private readonly SluggerInterface $slugger)
     {
     }
 
@@ -67,9 +67,9 @@ class AuthorBookChapterService
         return new IdResponse($chapter->getId());
     }
 
-    public function updateChapter(UpdateBookChapterRequest $request): void
+    public function updateChapter(UpdateBookChapterRequest $request, int $id): void
     {
-        $chapter = $this->bookChapterRepository->getById($request->getId());
+        $chapter = $this->bookChapterRepository->getById($id);
         $title = $request->getTitle();
         $chapter->setTitle($title)->setSlug($this->slugger->slug($title)->toString());
 
@@ -88,9 +88,9 @@ class AuthorBookChapterService
         return $this->bookChapterService->getChaptersTree($this->bookRepository->getBookById($bookId));
     }
 
-    public function updateChapterSort(UpdateBookChapterSortRequest $request): void
+    public function updateChapterSort(UpdateBookChapterSortRequest $request, int $id): void
     {
-        $chapter = $this->bookChapterRepository->getById($request->getId());
+        $chapter = $this->bookChapterRepository->getById($id);
         $sortContext = SortContext::fromNeighbours($request->getNextId(), $request->getPreviousId());
         $nearChapter = $this->bookChapterRepository->getById($sortContext->getNearId());
         $level = $nearChapter->getLevel();

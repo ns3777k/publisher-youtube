@@ -18,9 +18,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class SignUpService
 {
-    public function __construct(private UserPasswordHasherInterface $hasher,
-                                private UserRepository $userRepository,
-                                private AuthenticationSuccessHandler $successHandler)
+    public function __construct(private readonly UserPasswordHasherInterface $hasher,
+                                private readonly UserRepository $userRepository,
+                                private readonly AuthenticationSuccessHandler $successHandler)
     {
     }
 

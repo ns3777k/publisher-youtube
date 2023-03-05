@@ -31,7 +31,7 @@ class BookControllerTest extends AbstractControllerTest
         $this->em->flush();
 
         $this->client->request('GET', '/api/v1/category/'.$bookCategory->getId().'/books');
-        $responseContent = json_decode($this->client->getResponse()->getContent(), true);
+        $responseContent = json_decode($this->client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonDocumentMatchesSchema($responseContent, [
@@ -80,7 +80,7 @@ class BookControllerTest extends AbstractControllerTest
         $this->em->flush();
 
         $this->client->request('GET', '/api/v1/book/'.$book->getId());
-        $responseContent = json_decode($this->client->getResponse()->getContent(), true);
+        $responseContent = json_decode($this->client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonDocumentMatchesSchema($responseContent, [
