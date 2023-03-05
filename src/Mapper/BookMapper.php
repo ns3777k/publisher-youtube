@@ -55,7 +55,7 @@ class BookMapper
                 ->setComment($formatJoin->getFormat()->getComment())
                 ->setPrice($formatJoin->getPrice())
                 ->setDiscountPercent($formatJoin->getDiscountPercent()
-            ))
+                ))
             ->toArray();
     }
 }

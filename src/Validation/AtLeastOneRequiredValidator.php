@@ -29,7 +29,7 @@ class AtLeastOneRequiredValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, AtLeastOneRequired::class);
         }
 
-        $passed = array_filter($constraint->requiredFields, fn(string $required) => null !== $this->propertyAccessor->getValue($object, $required));
+        $passed = array_filter($constraint->requiredFields, fn (string $required) => null !== $this->propertyAccessor->getValue($object, $required));
 
         if (!empty($passed)) {
             return;

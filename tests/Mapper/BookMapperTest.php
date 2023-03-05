@@ -12,7 +12,6 @@ use App\Entity\Book;
 use App\Mapper\BookMapper;
 use App\Model\BookDetails;
 use App\Tests\AbstractTestCase;
-use DateTimeImmutable;
 
 class BookMapperTest extends AbstractTestCase
 {
@@ -20,7 +19,7 @@ class BookMapperTest extends AbstractTestCase
     {
         $book = (new Book())->setTitle('title')->setSlug('slug')->setImage('123')
             ->setAuthors(['tester'])
-            ->setPublicationDate(new DateTimeImmutable('2020-10-10'));
+            ->setPublicationDate(new \DateTimeImmutable('2020-10-10'));
 
         $this->setEntityId($book, 1);
 

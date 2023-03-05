@@ -10,7 +10,6 @@ namespace App\Service;
 
 use App\Model\Author\PublishBookRequest;
 use App\Repository\BookRepository;
-use DateTimeInterface;
 
 class BookPublishService
 {
@@ -28,7 +27,7 @@ class BookPublishService
         $this->setPublicationDate($id, null);
     }
 
-    private function setPublicationDate(int $id, ?DateTimeInterface $dateTime): void
+    private function setPublicationDate(int $id, ?\DateTimeInterface $dateTime): void
     {
         $book = $this->bookRepository->getBookById($id);
         $book->setPublicationDate($dateTime);

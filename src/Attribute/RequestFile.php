@@ -11,7 +11,7 @@ namespace App\Attribute;
 use Attribute;
 use Symfony\Component\Validator\Constraint;
 
-#[Attribute(Attribute::TARGET_PARAMETER)]
+#[\Attribute(\Attribute::TARGET_PARAMETER)]
 class RequestFile
 {
     /**

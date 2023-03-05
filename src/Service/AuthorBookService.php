@@ -60,7 +60,7 @@ class AuthorBookService
     {
         return new BookListResponse(
             array_map($this->map(...),
-            $this->bookRepository->findUserBooks($user))
+                $this->bookRepository->findUserBooks($user))
         );
     }
 

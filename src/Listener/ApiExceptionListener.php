@@ -19,7 +19,6 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
-use Throwable;
 
 class ApiExceptionListener
 {
@@ -60,7 +59,7 @@ class ApiExceptionListener
         $event->setResponse(new JsonResponse($data, $mapping->getCode(), [], true));
     }
 
-    private function isSecurityException(Throwable $throwable): bool
+    private function isSecurityException(\Throwable $throwable): bool
     {
         return $throwable instanceof AuthenticationException;
     }

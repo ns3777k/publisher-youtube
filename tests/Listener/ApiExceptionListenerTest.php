@@ -14,7 +14,6 @@ use App\Model\ErrorResponse;
 use App\Service\ExceptionHandler\ExceptionMapping;
 use App\Service\ExceptionHandler\ExceptionMappingResolver;
 use App\Tests\AbstractTestCase;
-use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
@@ -47,7 +46,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
 
         $this->resolver->expects($this->once())
             ->method('resolve')
-            ->with(InvalidArgumentException::class)
+            ->with(\InvalidArgumentException::class)
             ->willReturn($mapping);
 
         $this->serializer->expects($this->once())
@@ -55,7 +54,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
             ->with(new ErrorResponse($responseMessage), JsonEncoder::FORMAT)
             ->willReturn($responseBody);
 
-        $event = $this->createExceptionEvent(new InvalidArgumentException('test'));
+        $event = $this->createExceptionEvent(new \InvalidArgumentException('test'));
 
         $this->runListener($event);
 
@@ -70,7 +69,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
 
         $this->resolver->expects($this->once())
             ->method('resolve')
-            ->with(InvalidArgumentException::class)
+            ->with(\InvalidArgumentException::class)
             ->willReturn($mapping);
 
         $this->serializer->expects($this->once())
@@ -78,7 +77,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
             ->with(new ErrorResponse($responseMessage), JsonEncoder::FORMAT)
             ->willReturn($responseBody);
 
-        $event = $this->createExceptionEvent(new InvalidArgumentException('test'));
+        $event = $this->createExceptionEvent(new \InvalidArgumentException('test'));
 
         $this->runListener($event);
 
@@ -93,7 +92,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
 
         $this->resolver->expects($this->once())
             ->method('resolve')
-            ->with(InvalidArgumentException::class)
+            ->with(\InvalidArgumentException::class)
             ->willReturn($mapping);
 
         $this->serializer->expects($this->once())
@@ -104,7 +103,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
         $this->logger->expects($this->once())
             ->method('error');
 
-        $event = $this->createExceptionEvent(new InvalidArgumentException('test'));
+        $event = $this->createExceptionEvent(new \InvalidArgumentException('test'));
 
         $this->runListener($event);
 
@@ -119,7 +118,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
 
         $this->resolver->expects($this->once())
             ->method('resolve')
-            ->with(InvalidArgumentException::class)
+            ->with(\InvalidArgumentException::class)
             ->willReturn($mapping);
 
         $this->serializer->expects($this->once())
@@ -131,7 +130,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
             ->method('error')
             ->with('error message', $this->anything());
 
-        $event = $this->createExceptionEvent(new InvalidArgumentException('error message'));
+        $event = $this->createExceptionEvent(new \InvalidArgumentException('error message'));
 
         $this->runListener($event);
 
@@ -145,7 +144,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
 
         $this->resolver->expects($this->once())
             ->method('resolve')
-            ->with(InvalidArgumentException::class)
+            ->with(\InvalidArgumentException::class)
             ->willReturn(null);
 
         $this->serializer->expects($this->once())
@@ -157,7 +156,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
             ->method('error')
             ->with('error message', $this->anything());
 
-        $event = $this->createExceptionEvent(new InvalidArgumentException('error message'));
+        $event = $this->createExceptionEvent(new \InvalidArgumentException('error message'));
 
         $this->runListener($event);
 
@@ -172,7 +171,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
 
         $this->resolver->expects($this->once())
             ->method('resolve')
-            ->with(InvalidArgumentException::class)
+            ->with(\InvalidArgumentException::class)
             ->willReturn($mapping);
 
         $this->serializer->expects($this->once())
@@ -189,7 +188,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
             )
             ->willReturn($responseBody);
 
-        $event = $this->createExceptionEvent(new InvalidArgumentException($responseMessage));
+        $event = $this->createExceptionEvent(new \InvalidArgumentException($responseMessage));
 
         $this->runListener($event, true);
 

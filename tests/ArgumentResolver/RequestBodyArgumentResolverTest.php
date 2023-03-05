@@ -13,8 +13,6 @@ use App\Attribute\RequestBody;
 use App\Exception\RequestBodyConvertException;
 use App\Exception\ValidationException;
 use App\Tests\AbstractTestCase;
-use Exception;
-use stdClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -49,14 +47,14 @@ class RequestBodyArgumentResolverTest extends AbstractTestCase
         $this->expectException(RequestBodyConvertException::class);
 
         $request = new Request([], [], [], [], [], [], 'testing content');
-        $meta = new ArgumentMetadata('some', stdClass::class, false, false, null, false, [
+        $meta = new ArgumentMetadata('some', \stdClass::class, false, false, null, false, [
             new RequestBody(),
         ]);
 
         $this->serializer->expects($this->once())
             ->method('deserialize')
-            ->with('testing content', stdClass::class, JsonEncoder::FORMAT)
-            ->willThrowException(new Exception());
+            ->with('testing content', \stdClass::class, JsonEncoder::FORMAT)
+            ->willThrowException(new \Exception());
 
         $this->createResolver()->resolve($request, $meta);
     }
@@ -69,13 +67,13 @@ class RequestBodyArgumentResolverTest extends AbstractTestCase
         $encodedBody = json_encode($body);
 
         $request = new Request([], [], [], [], [], [], $encodedBody);
-        $meta = new ArgumentMetadata('some', stdClass::class, false, false, null, false, [
+        $meta = new ArgumentMetadata('some', \stdClass::class, false, false, null, false, [
             new RequestBody(),
         ]);
 
         $this->serializer->expects($this->once())
             ->method('deserialize')
-            ->with($encodedBody, stdClass::class, JsonEncoder::FORMAT)
+            ->with($encodedBody, \stdClass::class, JsonEncoder::FORMAT)
             ->willReturn($body);
 
         $this->validator->expects($this->once())
@@ -94,13 +92,13 @@ class RequestBodyArgumentResolverTest extends AbstractTestCase
         $encodedBody = json_encode($body);
 
         $request = new Request([], [], [], [], [], [], $encodedBody);
-        $meta = new ArgumentMetadata('some', stdClass::class, false, false, null, false, [
+        $meta = new ArgumentMetadata('some', \stdClass::class, false, false, null, false, [
             new RequestBody(),
         ]);
 
         $this->serializer->expects($this->once())
             ->method('deserialize')
-            ->with($encodedBody, stdClass::class, JsonEncoder::FORMAT)
+            ->with($encodedBody, \stdClass::class, JsonEncoder::FORMAT)
             ->willReturn($body);
 
         $this->validator->expects($this->once())

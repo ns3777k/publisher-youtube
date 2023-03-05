@@ -31,9 +31,9 @@ class BookChapterServiceTest extends AbstractTestCase
     {
         $book = new Book();
         $response = new BookChapterTreeResponse([
-            (new BookChapterModel(1, 'Test chapter', 'test-chapter', [
-                (new BookChapterModel(2, 'Test chapter', 'test-chapter')),
-            ])),
+            new BookChapterModel(1, 'Test chapter', 'test-chapter', [
+                new BookChapterModel(2, 'Test chapter', 'test-chapter'),
+            ]),
         ]);
 
         $parentChapter = MockUtils::createBookChapter($book);
