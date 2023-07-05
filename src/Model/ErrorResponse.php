@@ -22,7 +22,7 @@ class ErrorResponse
         return $this->message;
     }
 
-    #[OA\Property(type: 'object', oneOf: [
+    #[OA\Property(type: 'object', nullable: true, oneOf: [
         new OA\Schema(ref: new Model(type: ErrorDebugDetails::class)),
         new OA\Schema(ref: new Model(type: ErrorValidationDetails::class))]
     )]
