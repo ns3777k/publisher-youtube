@@ -128,4 +128,54 @@ class BookControllerTest extends AbstractControllerTest
             ],
         ]);
     }
+
+    public function testChapterContent(): void
+    {
+        $user = MockUtils::createUser();
+        $this->em->persist($user);
+
+        $book = MockUtils::createBook()->setUser($user);
+        $this->em->persist($book);
+
+        $bookChapter = MockUtils::createBookChapter($book);
+        $this->em->persist($bookChapter);
+
+        $bookContent = MockUtils::createBookContent($bookChapter);
+        $this->em->persist($bookContent);
+
+        $unpublishedBookContent = MockUtils::createBookContent($bookChapter)->setIsPublished(false);
+        $this->em->persist($unpublishedBookContent);
+
+        $this->em->flush();
+
+        $url = sprintf('/api/v1/book/%d/chapter/%d/content', $book->getId(), $bookChapter->getId());
+
+        $this->client->request('GET', $url);
+        $responseContent = json_decode($this->client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertJsonDocumentMatches($responseContent, ['$.items' => self::countOf(1)]);
+        $this->assertJsonDocumentMatchesSchema($responseContent, [
+            'type' => 'object',
+            'required' => ['items', 'page', 'pages', 'perPage', 'total'],
+            'properties' => [
+                'page' => ['type' => 'integer'],
+                'pages' => ['type' => 'integer'],
+                'perPage' => ['type' => 'integer'],
+                'total' => ['type' => 'integer'],
+                'items' => [
+                    'type' => 'array',
+                    'items' => [
+                        'type' => 'object',
+                        'required' => ['id', 'content', 'published'],
+                        'properties' => [
+                            'id' => ['type' => 'integer'],
+                            'content' => ['type' => 'string'],
+                            'published' => ['type' => 'boolean'],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
 }

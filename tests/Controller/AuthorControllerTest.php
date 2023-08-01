@@ -367,4 +367,112 @@ class AuthorControllerTest extends AbstractControllerTest
 
         $this->assertResponseIsSuccessful();
     }
+
+    public function testCreateBookContent(): void
+    {
+        $user = $this->createAuthorAndAuth('user@test.com', 'testtest');
+        $book = MockUtils::createBook()->setUser($user);
+        $chapter = MockUtils::createBookChapter($book);
+
+        $this->em->persist($book);
+        $this->em->persist($chapter);
+        $this->em->flush();
+
+        $url = sprintf('/api/v1/author/book/%d/chapter/%d/content', $book->getId(), $chapter->getId());
+        $this->client->request('POST', $url, [], [], [],
+            json_encode(['content' => 'Test Content', 'published' => true]));
+
+        $responseContent = json_decode($this->client->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertJsonDocumentMatchesSchema($responseContent, [
+            'type' => 'object',
+            'required' => ['id'],
+            'properties' => [
+                'id' => ['type' => 'integer'],
+            ],
+        ]);
+    }
+
+    public function testUpdateBookContent(): void
+    {
+        $user = $this->createAuthorAndAuth('user@test.com', 'testtest');
+        $book = MockUtils::createBook()->setUser($user);
+        $chapter = MockUtils::createBookChapter($book);
+        $content = MockUtils::createBookContent($chapter);
+
+        $this->em->persist($book);
+        $this->em->persist($chapter);
+        $this->em->persist($content);
+        $this->em->flush();
+
+        $url = sprintf('/api/v1/author/book/%d/chapter/%d/content/%d', $book->getId(), $chapter->getId(), $content->getId());
+        $this->client->request('DELETE', $url, [], [], [],
+            json_encode(['content' => 'New Test Content', 'published' => false]));
+
+        $this->assertResponseIsSuccessful();
+    }
+
+    public function testDeleteBookContent(): void
+    {
+        $user = $this->createAuthorAndAuth('user@test.com', 'testtest');
+        $book = MockUtils::createBook()->setUser($user);
+        $chapter = MockUtils::createBookChapter($book);
+        $content = MockUtils::createBookContent($chapter);
+
+        $this->em->persist($book);
+        $this->em->persist($chapter);
+        $this->em->persist($content);
+        $this->em->flush();
+
+        $url = sprintf('/api/v1/author/book/%d/chapter/%d/content/%d', $book->getId(), $chapter->getId(), $content->getId());
+        $this->client->request('DELETE', $url);
+
+        $this->assertResponseIsSuccessful();
+    }
+
+    public function testChapterContent(): void
+    {
+        $user = $this->createAuthorAndAuth('user@test.com', 'testtest');
+        $book = MockUtils::createBook()->setUser($user);
+        $chapter = MockUtils::createBookChapter($book);
+        $content = MockUtils::createBookContent($chapter);
+        $unpublishedContent = MockUtils::createBookContent($chapter)->setIsPublished(false);
+
+        $this->em->persist($book);
+        $this->em->persist($chapter);
+        $this->em->persist($content);
+        $this->em->persist($unpublishedContent);
+        $this->em->flush();
+
+        $url = sprintf('/api/v1/author/book/%d/chapter/%d/content', $book->getId(), $chapter->getId());
+        $this->client->request('GET', $url);
+
+        $responseContent = json_decode($this->client->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertJsonDocumentMatches($responseContent, ['$.items' => self::countOf(2)]);
+        $this->assertJsonDocumentMatchesSchema($responseContent, [
+            'type' => 'object',
+            'required' => ['items', 'page', 'pages', 'perPage', 'total'],
+            'properties' => [
+                'page' => ['type' => 'integer'],
+                'pages' => ['type' => 'integer'],
+                'perPage' => ['type' => 'integer'],
+                'total' => ['type' => 'integer'],
+                'items' => [
+                    'type' => 'array',
+                    'items' => [
+                        'type' => 'object',
+                        'required' => ['id', 'content', 'published'],
+                        'properties' => [
+                            'id' => ['type' => 'integer'],
+                            'content' => ['type' => 'string'],
+                            'published' => ['type' => 'boolean'],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
 }
